@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Nipplecraft/magenta</title>
+	<style>
+		html, 
+		body {
+			height: 100%;
+		}
+		body {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: green;
+		}
+		#content {
+			font-size: 5rem;
+			font-weight: bold;
+			color: cyan;
+			font-family: sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<div id="content">
+		BAMBOOZLED LUL
+	</div>
+<script type="text/javascript">
+
+	function fromTo(r,g,b,rn,gn,bn,steps){
+		result = Array(Array(r,g,b));
+		for(i = 1; i < steps; i++){
+			rx = r + Math.floor((rn - r) * (i/steps));
+			gx = g + Math.floor((gn - g) * (i/steps));
+			bx = b + Math.floor((bn - b) * (i/steps));
+			
+			result[i] = Array(rx, gx, bx);
+		}
+		//alert(result);
+		return result;
+	}
+	
+	function doIt(colors, i){
+		if(i >= colors.length){
+			newTargetR = Math.random()*225;
+			newTargetG = Math.random()*225;
+			newTargetB = Math.random()*225;
+			oldR = colors[colors.length - 1][0];
+			oldG = colors[colors.length - 1][1];
+			oldB = colors[colors.length - 1][2];
+			colors = fromTo(oldR, oldG, oldB, newTargetR, newTargetG, newTargetB, 2);
+			i = 0;
+		}
+		newR = colors[i][0];
+		newG = colors[i][1];
+		newB = colors[i][2];
+		
+		document.getElementById('content').style.color = "rgb("+newR+","+newG+","+newB+")";
+		setTimeout(function(){doIt(colors, i+1);}, 100);
+	}
+	doIt(Array(Array(255,255,255)), 1);
+</script>
+</body>
+</html>
